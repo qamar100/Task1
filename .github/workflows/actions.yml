@@ -1,0 +1,13 @@
+name: postman-test
+
+on: [push]
+jobs:
+  run-postman-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+      - run: npm install -g newman
+      - run: run newman postman_tests/Books.postman_collection.json -e postman_tests/test.postman_environment.json
